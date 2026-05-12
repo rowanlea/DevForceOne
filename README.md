@@ -3,7 +3,7 @@
 ## Setup (one-time)
 
 1. `pip install pyyaml`
-2. Copy `SKILL.md` and `preflight.py` into your Cursor skills folder:
+2. Copy the entire `megalinter` folder into your Cursor skills folder:
    ```
    .cursor/
      └── skills-cursor/
@@ -18,3 +18,6 @@
 ## Running a scan
 
 Open the project you want to scan in Cursor and invoke the MegaLinter skill.
+
+## Skills Menu
+- Use Cursor's in-built `split-to-prs` to convert a large change set into small, understandable pull requests. - _I had an idea to create exactly this skill, and then found that cursor already did it, so I'm not going to reinvent the wheel._

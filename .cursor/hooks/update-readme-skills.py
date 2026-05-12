@@ -26,7 +26,7 @@ def main():
 
     path_norm = path.replace("\\", "/")
 
-    if not fnmatch.fnmatch(path_norm, "skills/*/SKILL.md"):
+    if not fnmatch.fnmatch(path_norm, ".cursor/skills/*/SKILL.md"):
         sys.exit(0)
 
     # Read the SKILL.md contents (prefer hook payload, fall back to disk)

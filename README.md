@@ -22,3 +22,4 @@ Open the project you want to scan in Cursor and invoke the MegaLinter skill.
 ## Skills Menu
 - Use Cursor's in-built `split-to-prs` to convert a large change set into small, understandable pull requests. - _I had an idea to create exactly this skill, and then found that cursor already did it, so I'm not going to reinvent the wheel._
 - `commit-auto` will figure out an appropriate commit message for all the changes you currently have. It will add everything currently unstaged, so make sure you manually review changes first.
+- `code-coverage` Detects and runs code coverage tools for the current project. Checks if a coverage tool is already installed for the project's programming language; if one is found, runs it immediately. If none is found, installs the most popular free tool for that language first and then runs it. If the choice of tool is ambiguous, presents the user with a list of options.

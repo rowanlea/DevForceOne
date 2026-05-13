@@ -26,7 +26,7 @@ def main():
 
     path_norm = path.replace("\\", "/")
 
-    if not fnmatch.fnmatch(path_norm, ".cursor/skills/*/SKILL.md"):
+    if not re.search(r"\.cursor/skills/[^/]+/SKILL\.md$", path_norm):
         sys.exit(0)
 
     # Read the SKILL.md contents (prefer hook payload, fall back to disk)
@@ -65,7 +65,9 @@ def main():
 
     new_entry = f"- `{name}` {readme_desc}"
 
-    readme_path = "README.md"
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    repo_root = os.path.dirname(os.path.dirname(script_dir))  # hooks/ -> .cursor/ -> repo root
+    readme_path = os.path.join(repo_root, "README.md")
     if not os.path.exists(readme_path):
         sys.exit(0)
 

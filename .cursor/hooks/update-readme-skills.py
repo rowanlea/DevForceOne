@@ -20,18 +20,20 @@ def main():
     # Resolve the file path from whichever key the hook runtime populates
     path = (
         data.get("path")
+        or data.get("tool_input", {}).get("path")
         or data.get("input", {}).get("path")
         or ""
     )
 
     path_norm = path.replace("\\", "/")
 
-    if not re.search(r"\.cursor/skills/[^/]+/SKILL\.md$", path_norm):
+    if not re.search(r"(?:^|/)skills/[^/]+/SKILL\.md$", path_norm):
         sys.exit(0)
 
     # Read the SKILL.md contents (prefer hook payload, fall back to disk)
     contents = (
         data.get("contents")
+        or data.get("tool_input", {}).get("contents")
         or data.get("input", {}).get("contents")
         or ""
     )
@@ -91,7 +93,7 @@ def main():
         new_readme = readme.rstrip("\n") + "\n" + new_entry + "\n"
     else:
         # Insert the entry just before the next section heading
-        new_readme = readme[:next_section] + "\n" + new_entry + readme[next_section:]
+        new_readme = readme[:next_section] + "\n" + new_entry + "\n" + readme[next_section:]
 
     with open(readme_path, "w", encoding="utf-8") as f:
         f.write(new_readme)

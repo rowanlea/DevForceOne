@@ -3,7 +3,7 @@
   "hooks": {
     "afterFileEdit": [
       {
-        "command": "python .cursor/hooks/update-readme-skills.py",
+        "command": "py .cursor/hooks/update-readme-skills.py",
         "matcher": "Write"
       }
     ]

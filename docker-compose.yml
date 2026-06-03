@@ -19,19 +19,27 @@ services:
 
   loki:
     image: grafana/loki:latest
+    container_name: loki
     ports:
       - "3100:3100"
+    volumes:
+      - loki-data:/loki
     networks:
       - megalinter-net
     restart: unless-stopped
 
   victoriametrics:
     image: victoriametrics/victoria-metrics:latest
+    container_name: victoriametrics
     ports:
       - "8428:8428"
+    volumes:
+      - victoriametrics-data:/victoria-metrics-data
     networks:
       - megalinter-net
     restart: unless-stopped
 
 volumes:
   grafana-data:
+  loki-data:
+  victoriametrics-data:

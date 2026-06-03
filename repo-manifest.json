@@ -1,0 +1,11 @@
+{
+  "name": "DevForceOne",
+  "technologies": ["Docker", "Python", "Grafana", "Loki", "VictoriaMetrics"],
+  "capabilities": [
+    "MegaLinter scanning and reporting",
+    "Auto-commit and code coverage workflows",
+    "Observability stack with Grafana, Loki, and VictoriaMetrics",
+    "Skill hub for cross-project automation"
+  ],
+  "triggerKeywords": ["devforce", "linter", "grafana", "observability", "metrics", "monitoring", "skills hub"]
+}

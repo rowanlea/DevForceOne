@@ -17,6 +17,7 @@ It's then available as a slash command, e.g. `/code-coverage`. Some commands als
 - `/run-local` — figures out how to run a project locally: installs dependencies, sets up virtualenvs, resolves conflicts, verifies it runs, and writes a concise "Running locally" README section.
 - `/html-doc` — creates a polished, self-contained HTML presentation document from a prompt.
 - `/analyse-file` — analyses a single file to help you decide how to refactor it: inventory, external-call usage, a 30-second summary, and coupling/cohesion with brief tips.
+- `/split-to-prs` — splits your current work into small, reviewable PRs: proposes a reviewer-aligned split plan, waits for approval, snapshots your work, then creates the branches/PRs.
 - `/megalinter` — configures and runs an optimised MegaLinter scan. **Requires** `scripts/megalinter-preflight.py` copied to your `.claude/scripts/`, plus `pip install pyyaml`, Docker, and the Grafana stack below.
 
 ## MegaLinter scans

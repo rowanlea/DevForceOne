@@ -1,7 +1,5 @@
 ---
-name: commit-auto
-description: Generates a meaningful git commit message by analysing staged and unstaged changes, then runs `git add -A`, `git commit -m "<message>"`, and `git push`. Use when the user asks to commit, push, auto-commit, generate a commit message, or says something like "commit my changes".
-disable-model-invocation: true
+description: Generate a meaningful commit message from current changes, then add, commit, and push.
 ---
 
 # Auto-Commit

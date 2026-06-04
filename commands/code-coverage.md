@@ -1,7 +1,5 @@
 ---
-name: code-coverage
-description: Detects and runs code coverage tools for the current project. Checks if a coverage tool is already installed for the project's programming language; if one is found, runs it immediately. If none is found, installs the most popular free tool for that language first and then runs it. If the choice of tool is ambiguous, presents the user with a list of options. Use when the user wants to measure test coverage, generate a coverage report, or check which coverage tools are in use.
-disable-model-invocation: true
+description: Detect and run the right code coverage tool for this project, installing one if needed.
 ---
 
 # Code Coverage
@@ -56,4 +54,4 @@ If a tool is found, run it. Do not proceed to Step 3.
 
 **If there is a clear single best option** — tell the user which tool you are installing and why, then install and run it.
 
-**If the choice is ambiguous** — present the user with a shortlist (2–4 options) using the `AskQuestion` tool if available, otherwise list them conversationally. For each option include: name, one-line description, and why it fits this project. Wait for the user to choose before installing anything.
+**If the choice is ambiguous** — present the user with a shortlist (2–4 options) using the `AskUserQuestion` tool. For each option include: name, one-line description, and why it fits this project. Wait for the user to choose before installing anything.

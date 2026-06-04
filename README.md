@@ -1,30 +1,50 @@
 # DevForceOne
 
-## Setup (one-time)
+A grab-bag of Claude Code commands and supporting scripts. Take whatever is useful — nothing here is wired into an active `.claude/` folder, so cloning this repo won't override or conflict with your own user- or project-level Claude config.
 
-1. `pip install pyyaml`
-2. Copy any skills you want from the `skills/` folder into your Cursor skills folder (e.g. `megalinter`):
-   ```
-   .cursor/
-     └── skills-cursor/
-        └── megalinter/
-            ├── SKILL.md
-            └── scripts/
-                └── preflight.py
-   ```
-3. Start the Grafana stack: `docker compose up -d`
-4. Open Grafana at [http://localhost:3000](http://localhost:3000) — dashboards are provisioned automatically
+## Installing a command
 
-## Running a scan
+Copy the command you want from `commands/` into your own Claude Code commands folder:
 
-Open the project you want to scan in Cursor and invoke the MegaLinter skill.
+- **User-level (available everywhere):** `~/.claude/commands/`
+- **Project-level (just one repo):** `<project>/.claude/commands/`
 
-## Skills Menu
-- Use Cursor's in-built `split-to-prs` to convert a large change set into small, understandable pull requests. - _I had an idea to create exactly this skill, and then found that cursor already did it, so I'm not going to reinvent the wheel._
-- `commit-auto` will figure out an appropriate commit message for all the changes you currently have. It will add everything currently unstaged, so make sure you manually review changes first.
-- `code-coverage` Detects and runs code coverage tools for the current project. Checks if a coverage tool is already installed for the project's programming language; if one is found, runs it immediately. If none is found, installs the most popular free tool for that language first and then runs it. If the choice of tool is ambiguous, presents the user with a list of options.
-- `run-local` Figures out how to run a project locally, installs dependencies, sets up virtual environments (Python etc.), resolves dependency conflicts, verifies the project runs correctly, and writes or updates a concise "Running locally" README section.
-- `html-doc` Creates a polished, self-contained HTML presentation document from a given prompt.
+It's then available as a slash command, e.g. `/code-coverage`. Some commands also need a script from `scripts/` — see the menu below.
+
+## Commands Menu
+- `/commit-auto` — figures out an appropriate commit message for all your current changes, then adds, commits, and pushes. It stages everything unstaged, so review your changes first.
+- `/code-coverage` — detects and runs the right code coverage tool for the project; installs the most popular free one if none is present, and asks you to choose when ambiguous.
+- `/run-local` — figures out how to run a project locally: installs dependencies, sets up virtualenvs, resolves conflicts, verifies it runs, and writes a concise "Running locally" README section.
+- `/html-doc` — creates a polished, self-contained HTML presentation document from a prompt.
+- `/analyse-file` — analyses a single file to help you decide how to refactor it: inventory, external-call usage, a 30-second summary, and coupling/cohesion with brief tips.
+- `/megalinter` — configures and runs an optimised MegaLinter scan. **Requires** `scripts/megalinter-preflight.py` copied to your `.claude/scripts/`, plus `pip install pyyaml`, Docker, and the Grafana stack below.
+
+## MegaLinter scans
+
+The `/megalinter` command runs a smart, fast scan of the open repo:
+
+1. Copy `scripts/megalinter-preflight.py` into your `.claude/scripts/` and `pip install pyyaml`.
+2. Start the Grafana stack so results can be reported: `docker compose up -d`, then open Grafana at [http://localhost:3000](http://localhost:3000) (dashboards are provisioned automatically). The scan still runs if the stack is down — results stay in the console output and MegaLinter logs.
+3. Run `/megalinter` in the project you want to scan.
+
+## Optional: auto-maintain your Commands Menu
+
+`scripts/update-readme-commands.py` is a Claude Code `PostToolUse` hook that appends an entry to a `## Commands Menu` section in your README whenever you write a new `.claude/commands/<name>.md`. To use it, copy the script into your `.claude/scripts/` and add this to your `.claude/settings.json`:
+
+```json
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit|MultiEdit",
+        "hooks": [
+          { "type": "command", "command": "python .claude/scripts/update-readme-commands.py" }
+        ]
+      }
+    ]
+  }
+}
+```
 
 ## Additional Force Multiplying Tools
 - [OpenWhispr](https://openwhispr.com/) - a free alternative to WisprFlow. It can be clunky to use sometimes, but the results are just as good, if not occasionally better than WisprFlow.

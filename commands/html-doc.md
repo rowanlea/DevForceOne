@@ -1,12 +1,11 @@
 ---
-name: html-doc
-description: Creates a polished, self-contained HTML presentation document from a given prompt. Use when the user asks to generate an HTML doc, write a presentation, create a tech explainer page, or produce a visual summary of work for colleagues.
-disable-model-invocation: true
+description: Create a polished, self-contained HTML presentation document from a prompt.
+argument-hint: [what the document should cover]
 ---
 
 # HTML Doc
 
-Produce a single, self-contained `.html` file — no external dependencies, all CSS and any JS inline — that looks like a professional presentation.
+Produce a single, self-contained `.html` file — no external dependencies, all CSS and any JS inline — that looks like a professional presentation. The document should cover: `$ARGUMENTS`
 
 ## Audience & purpose
 

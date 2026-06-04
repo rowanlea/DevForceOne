@@ -1,6 +1,5 @@
 ---
-name: run-local
-description: Figures out how to run a project locally, installs dependencies, sets up virtual environments (Python etc.), resolves dependency conflicts, verifies the project runs correctly, and writes or updates a concise "Running locally" README section. Use when the user wants to get a project running locally, set up a dev environment, fix dependency issues, or document how to run the project.
+description: Get the project running locally (deps, virtualenvs, conflicts), verify it, and document how.
 ---
 
 # Local Dev Setup
